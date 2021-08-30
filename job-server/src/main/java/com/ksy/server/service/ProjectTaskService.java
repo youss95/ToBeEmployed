@@ -18,7 +18,13 @@ public class ProjectTaskService {
 		return projectTaskRepository.findByCategory(category);
 	}
 	
-	public ProjectTask saveProject(ProjectTask projectTask) {
+	public ProjectTask saveProject(ProjectTask projectTask,String category) {
+	
+		/*
+		 * Integer taskSeq = projectTask.getTaskSeq(); taskSeq ++;
+		 * projectTask.setTaskSeq(taskSeq);
+		 * projectTask.setPrjIdentifier(category+"-"+taskSeq);
+		 */
 		return projectTaskRepository.save(projectTask);
 	}
 	

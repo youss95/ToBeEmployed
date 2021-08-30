@@ -14,8 +14,11 @@ const ProjectItem = () => {
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <Link to={'/todo/Work'} className="btn btn-primary">
-                Go somewhere
+              <Link to={'/todo/work'} className="btn btn-primary">
+                일정 보기
+              </Link>
+              <Link to={'/addTask/work'} className="btn btn-primary">
+                일정 추가
               </Link>
             </div>
           </div>
@@ -27,7 +30,7 @@ const ProjectItem = () => {
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <Link to="#" className="btn btn-primary">
+              <Link to={'/todo/learning'} className="btn btn-primary">
                 Go somewhere
               </Link>
             </div>
@@ -40,8 +43,11 @@ const ProjectItem = () => {
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <Link to="#" className="btn btn-primary">
-                Go somewhere
+              <Link to={'/todo/study'} className="btn btn-primary">
+                일정 보기
+              </Link>
+              <Link to={'/addTask/study'} className="btn btn-primary">
+                일정 추가
               </Link>
             </div>
           </div>
@@ -52,7 +58,7 @@ const ProjectItem = () => {
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <Link to="#" className="btn btn-primary">
+              <Link to={'/todo/fitness'} className="btn btn-primary">
                 Go somewhere
               </Link>
             </div>

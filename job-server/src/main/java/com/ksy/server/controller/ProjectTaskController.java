@@ -23,9 +23,9 @@ public class ProjectTaskController {
 	@Autowired
 	private ProjectTaskService projectTaskService;
 	
-	@PostMapping("")
-	public ResponseEntity<?> createNewTask(@RequestBody ProjectTask task){
-		ProjectTask projectTask = projectTaskService.saveProject(task);
+	@PostMapping("/{category}")
+	public ResponseEntity<?> createNewTask(@RequestBody ProjectTask task,@PathVariable String category){
+		ProjectTask projectTask = projectTaskService.saveProject(task,category);
 		return new ResponseEntity<ProjectTask>(projectTask,HttpStatus.CREATED);
 	}
 	
