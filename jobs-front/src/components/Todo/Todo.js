@@ -10,7 +10,9 @@ const Todo = (props) => {
 
   const [todo, setTodo] = useState([]);
 
-  const todos = todo.map((todo) => <TodoItems key={todo.id} todo={todo} />);
+  const todos = todo.map((todo) => (
+    <TodoItems key={todo.id} todo={todo} task_id={id} />
+  ));
 
   for (let i = 0; i < todos.length; i++) {
     console.log(todos[i].props.todo.status);
