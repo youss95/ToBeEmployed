@@ -1,0 +1,19 @@
+.container {
+  padding-top: 140px;
+  margin: auto;
+}
+
+.circle {
+  background-color: white;
+  border: 1px solid #3db2ff;
+  color: #3db2ff;
+  width: 150px;
+  height: 150px;
+  border-radius: 100px;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 25px;
+  font-weight: 600;
+  vertical-align: middle;
+  line-height: 150px;
+}

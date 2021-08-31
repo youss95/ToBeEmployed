@@ -21,7 +21,7 @@ public class ProjectTodoService {
 	
 	public List<ProjectTodo> findTodoById(Long id){
 		//id : 프로젝트 아이디
-		return toDoRepository.findByIdOrderByPriority(id);
+		return toDoRepository.findByProjectTask_IdOrderByPriority(id);
 	}
 	
 	public ProjectTodo registerProjectTodo(ProjectTodo todo,Long id) {

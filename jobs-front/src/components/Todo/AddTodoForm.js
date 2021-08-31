@@ -5,7 +5,7 @@ const AddTodoForm = (props) => {
   const id = props.match.params.id;
   const [todo, setTodo] = useState({
     content: '',
-    priority: '',
+    priority: 0,
     status: '',
     startDate: '',
     endDate: '',
@@ -17,6 +17,7 @@ const AddTodoForm = (props) => {
       [e.target.name]: e.target.value,
     });
     console.log(e.target.value);
+    console.log(todo);
   };
 
   const submitTodo = (e) => {
@@ -56,7 +57,7 @@ const AddTodoForm = (props) => {
         <dt>우선순위</dt>
         <dd>
           <div class="inp_slct">
-            <select className="priority" onChange={changeValue}>
+            <select className="priority" name="priority" onChange={changeValue}>
               <option value={100}>선택</option>
               <option value={1}>1(높음)</option>
               <option value={2}>2(중간)</option>
@@ -68,7 +69,7 @@ const AddTodoForm = (props) => {
         <dt>진행상황</dt>
         <dd>
           <div class="inp_slct">
-            <select className="status" onChange={changeValue}>
+            <select className="status" name="status" onChange={changeValue}>
               <option value="">선택</option>
               <option value="todo">준비</option>
               <option value="ing">진행중</option>

@@ -7,6 +7,7 @@ import ProjectTask from './components/Tasks/ProjectTask';
 import AddTaskForm from './components/Tasks/AddTaskForm';
 import UpdateTaskForm from './components/Tasks/UpdateTaskForm';
 import AddTodoForm from './components/Todo/AddTodoForm';
+import Todo from './components/Todo/Todo';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/addTask/:category" exact={true} component={AddTaskForm} />
       <Route path="/updateTask/:id" exact={true} component={UpdateTaskForm} />
       <Route path="/addTodo/:id" exact={true} component={AddTodoForm} />
+      <Route path="/todo/detail/:id" exact={true} component={Todo} />
     </div>
   );
 }

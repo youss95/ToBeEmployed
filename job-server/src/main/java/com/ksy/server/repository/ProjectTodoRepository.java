@@ -8,6 +8,6 @@ import com.ksy.server.domain.ProjectTodo;
 
 public interface ProjectTodoRepository extends JpaRepository<ProjectTodo,Long>{
 
-	List<ProjectTodo> findByIdOrderByPriority(Long id);
+	List<ProjectTodo> findByProjectTask_IdOrderByPriority(Long id);
 	
 }

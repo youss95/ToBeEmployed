@@ -24,10 +24,12 @@ public class ProjectTodoController {
 	
 	
 	@GetMapping("/{task_id}")
-	public ResponseEntity<?> getProjectTodo(@PathVariable Long task_id,@PathVariable Long todo_id ){
+	public ResponseEntity<?> getProjectTodo(@PathVariable Long task_id ){
 		
 		return new ResponseEntity<List<ProjectTodo>>(toDoService.findTodoById(task_id),HttpStatus.OK);
 	}
+	
+
 	
 	@PostMapping("/{task_id}")
 	public ResponseEntity<?> registerTodo(@RequestBody ProjectTodo todo,@PathVariable Long task_id){
