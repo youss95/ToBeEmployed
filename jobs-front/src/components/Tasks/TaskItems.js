@@ -40,7 +40,7 @@ const TaskItems = (props) => {
             <Link to="#" className="btn">
               일정 <BsArrow90DegLeft />
             </Link>
-            <Link to="#" className="btn">
+            <Link to={`/updateTask/${id}`} className="btn">
               수정 <BsPencil />
             </Link>
             <span to="#" className="btn" onClick={deleteTask}>

@@ -19,7 +19,7 @@ public class ProjectTaskService {
 		return projectTaskRepository.findByCategory(category);
 	}
 	
-	public ProjectTask saveProject(ProjectTask projectTask,String category) {
+	public ProjectTask saveProject(ProjectTask projectTask) {
 	
 		/*
 		 * Integer taskSeq = projectTask.getTaskSeq(); taskSeq ++;
@@ -34,4 +34,17 @@ public class ProjectTaskService {
 		
 		projectTaskRepository.deleteById(id);
 	}
+	
+	public ProjectTask updateById(ProjectTask projectTask,Long id) {
+		ProjectTask task = projectTaskRepository.findById(id).orElseThrow(()->new IllegalArgumentException("id를 확인"));
+		task.setContent(projectTask.getContent());
+		task.setProjectName(projectTask.getProjectName());
+		return task;
+	}
+	
+	
+	public ProjectTask getTaskById(Long id) {
+		return projectTaskRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Id 확인"));
+	}
+	 
 }
