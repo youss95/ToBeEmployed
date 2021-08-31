@@ -1,6 +1,7 @@
 package com.ksy.server.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,4 +29,9 @@ public class ProjectTaskService {
 		return projectTaskRepository.save(projectTask);
 	}
 	
+	public void deleteTaskById(Long id) {
+		//null판단
+		
+		projectTaskRepository.deleteById(id);
+	}
 }

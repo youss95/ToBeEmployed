@@ -7,7 +7,7 @@ const AddTaskForm = (props) => {
   const [task, setTask] = useState({
     projectName: '',
     content: '',
-    category: '',
+    category: category,
     startDate: '',
     endDate: '',
   });

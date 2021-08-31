@@ -1,0 +1,14 @@
+.taskItem {
+  width: 1200px;
+  margin: auto;
+}
+
+.card {
+  box-shadow: 0 3px 6px 0 rgb(140, 152, 164);
+  margin-bottom: 25px;
+  margin-top: 5px;
+}
+
+.doBtn {
+  float: right;
+}
