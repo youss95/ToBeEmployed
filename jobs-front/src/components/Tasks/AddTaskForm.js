@@ -26,7 +26,7 @@ const AddTaskForm = (props) => {
       'Content-Type': 'application/json;charset=utf-8',
     };
     axios
-      .post('http://localhost:8080/api/task/' + category, task, { headers })
+      .post('http://localhost:8080/api/task/', task, { headers })
       .then((res) => {
         console.log(res.data);
         setTask(res.data);

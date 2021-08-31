@@ -3,31 +3,34 @@ package com.ksy.server.domain;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-public class ProjectTask {
 
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class ProjectTodo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String projectName;
-	private String prjIdentifier;
-	private Integer taskSeq = 0;
+	
 	private String content;
-	private String category;
+	private String status;
+	private Integer priority;
 	@JsonFormat(pattern="yyyy-mm-dd")
 	private Date startDate;
 	@JsonFormat(pattern="yyyy-mm-dd")
@@ -37,16 +40,21 @@ public class ProjectTask {
 	@JsonFormat(pattern="yyyy-mm-dd")
 	private Date updateDate;
 	
-	//oneToMany
+	//.외래키 연관관계주인
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="task_id",updatable = false, nullable=false)
+	private ProjectTask projectTask;
 	
 	@PrePersist
-	protected void createPrj() {
+	protected void onCreate() {
 		this.createDate = new Date();
 	}
 	
 	@PreUpdate
-	protected void updatePrj() {
+	protected void onUpdate() {
 		this.updateDate = new Date();
 	}
+	
+	
 	
 }

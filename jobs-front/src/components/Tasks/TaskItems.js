@@ -4,6 +4,7 @@ import {
   BsFillBackspaceFill,
   BsArrow90DegLeft,
   BsPencil,
+  BsGearFill,
 } from 'react-icons/bs';
 import { Link, withRouter } from 'react-router-dom';
 import '../../css/taskItem.css';
@@ -40,8 +41,11 @@ const TaskItems = (props) => {
             <Link to="#" className="btn">
               일정 <BsArrow90DegLeft />
             </Link>
+            <Link to={`/addTodo/${id}`} className="btn">
+              생성 <BsPencil />
+            </Link>
             <Link to={`/updateTask/${id}`} className="btn">
-              수정 <BsPencil />
+              수정 <BsGearFill />
             </Link>
             <span to="#" className="btn" onClick={deleteTask}>
               삭제 <BsFillBackspaceFill />
