@@ -8,6 +8,7 @@ import AddTaskForm from './components/Tasks/AddTaskForm';
 import UpdateTaskForm from './components/Tasks/UpdateTaskForm';
 import AddTodoForm from './components/Todo/AddTodoForm';
 import Todo from './components/Todo/Todo';
+import UpdateTodo from './components/Todo/UpdateTodo';
 
 function App() {
   return (
@@ -19,6 +20,11 @@ function App() {
       <Route path="/updateTask/:id" exact={true} component={UpdateTaskForm} />
       <Route path="/addTodo/:id" exact={true} component={AddTodoForm} />
       <Route path="/todo/detail/:id" exact={true} component={Todo} />
+      <Route
+        path="/todo/update/:task_id/:id"
+        exact={true}
+        component={UpdateTodo}
+      />
     </div>
   );
 }

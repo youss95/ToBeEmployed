@@ -1,0 +1,39 @@
+.todoItem {
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: #deedf0;
+  border: 1px solid #c8c6c6;
+}
+
+.todoHeader {
+  padding: 5px;
+}
+
+.todoTitle {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.text-red {
+  color: #ff2626;
+}
+.text-blue {
+  color: #0f52ba;
+}
+.text-black {
+  color: #2d2424;
+}
+
+.updateBtn {
+  color: black;
+  margin-right: 5px;
+}
+.deleteBtn {
+  background-color: #deedf0;
+  border: 0;
+  outline: 0;
+}
+
+.due {
+  color: #7f7c82;
+}

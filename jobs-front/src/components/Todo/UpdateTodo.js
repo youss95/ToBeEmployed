@@ -1,72 +1,93 @@
 import axios from 'axios';
-import React, { useState } from 'react';
-import '../../css/AddTodoForm.css';
-const AddTodoForm = (props) => {
+import React, { useEffect, useState } from 'react';
+import '../../css/UpdateTodoForm.css';
+const UpdateTodo = (props) => {
+  const task_id = props.match.params.task_id;
   const id = props.match.params.id;
-  const [todo, setTodo] = useState({
+
+  const [updateTodo, setUpdateTodo] = useState({
     title: '',
     content: '',
-    priority: 0,
+    priority: '',
     status: '',
     startDate: '',
     endDate: '',
   });
 
   const changeValue = (e) => {
-    setTodo({
-      ...todo,
+    setUpdateTodo({
+      ...updateTodo,
       [e.target.name]: e.target.value,
     });
-    console.log(e.target.value);
-    console.log(todo);
   };
 
-  const submitTodo = (e) => {
+  const submitUpdate = (e) => {
     e.preventDefault();
     const headers = {
       'Content-Type': 'application/json;charset=utf-8',
     };
     axios
-      .post(`http://localhost:8080/api/todo/${id}`, todo, { headers })
+      .put(
+        `http://localhost:8080/api/todo/update/${task_id}/${id}`,
+        updateTodo,
+        {
+          headers,
+        },
+      )
       .then((res) => {
         console.log(res.data);
-        setTodo(res.data);
-        props.history.push('/');
+        setUpdateTodo(res.data);
+        props.history.push('/todo/detail/' + task_id);
+      });
+  };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/todo/${task_id}/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        setUpdateTodo(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  };
+  }, []);
 
   return (
-    <div className="addTodo">
-      <h3>일정을 추가해 주세요!</h3>
+    <div className="updateTodoForm">
+      <h3>수정</h3>
       <br />
-      <form onSubmit={submitTodo}>
-        <dt>What to do</dt>
+      <form onSubmit={submitUpdate}>
+        <dt>제목</dt>
         <input
           type="text"
           className="inpform"
-          placeholder="어떤 일을 하시겠습니까?"
+          placeholder="Placeholder"
           name="title"
           onChange={changeValue}
+          value={updateTodo.title}
         />
-
         <dt>내용</dt>
+
         <textarea
-          className="txtareaform"
+          class="txtareaform"
           name="content"
           id=""
           cols="30"
           rows="4"
           placeholder="내용을 입력해 주세요!"
           onChange={changeValue}
+          value={updateTodo.content}
         />
-
         <dt>우선순위</dt>
         <dd>
-          <div className="inp_slct">
-            <select className="priority" name="priority" onChange={changeValue}>
+          <div class="inp_slct">
+            <select
+              className="priority"
+              name="priority"
+              onChange={changeValue}
+              value={updateTodo.priority}
+            >
               <option value={100}>선택</option>
               <option value={1}>1(높음)</option>
               <option value={2}>2(중간)</option>
@@ -77,8 +98,13 @@ const AddTodoForm = (props) => {
 
         <dt>진행상황</dt>
         <dd>
-          <div className="inp_slct">
-            <select className="status" name="status" onChange={changeValue}>
+          <div class="inp_slct">
+            <select
+              className="status"
+              name="status"
+              onChange={changeValue}
+              value={updateTodo.status}
+            >
               <option value="">선택</option>
               <option value="todo">준비</option>
               <option value="ing">진행중</option>
@@ -86,29 +112,30 @@ const AddTodoForm = (props) => {
             </select>
           </div>
         </dd>
-
-        <dt>start</dt>
+        <dt>시작</dt>
         <div className="startDate">
           <input
             type="date"
             className="inpform"
             name="startDate"
             onChange={changeValue}
+            value={updateTodo.startDate}
           />
         </div>
-        <dt>end</dt>
+        <dt>끝</dt>
         <div className="startDate">
           <input
             type="date"
             className="inpform"
             name="endDate"
             onChange={changeValue}
+            value={updateTodo.endDate}
           />
         </div>
         <input
           type="submit"
           className="btn btn-primary btn-lg subBtn"
-          value="추가"
+          value="수정"
         />
       </form>
       <br />
@@ -116,4 +143,4 @@ const AddTodoForm = (props) => {
   );
 };
 
-export default AddTodoForm;
+export default UpdateTodo;

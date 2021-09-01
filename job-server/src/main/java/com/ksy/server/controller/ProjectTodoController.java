@@ -7,8 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +31,12 @@ public class ProjectTodoController {
 		
 		return new ResponseEntity<List<ProjectTodo>>(toDoService.findTodoById(task_id),HttpStatus.OK);
 	}
+	
+	@GetMapping("/{task_id}/{todo_id}")
+	public ResponseEntity<?> findTodoByTaskIdAndId(@PathVariable Long task_id , @PathVariable Long todo_id){
+		
+		return new ResponseEntity<ProjectTodo>(toDoService.getOneTodo(task_id, todo_id),HttpStatus.OK);
+	}
 		
 	@PostMapping("/{task_id}")
 	public ResponseEntity<?> registerTodo(@RequestBody ProjectTodo todo,@PathVariable Long task_id){
@@ -40,5 +48,13 @@ public class ProjectTodoController {
 	public ResponseEntity<?> deleteTodo(@PathVariable Long task_id, @PathVariable Long todo_id){
 		toDoService.deleteTodo(task_id, todo_id);
 		return new ResponseEntity<String>("deleted",HttpStatus.OK);
+	}
+	
+	@PutMapping("/update/{task_id}/{todo_id}")
+	public ResponseEntity<?> updateTodo(@RequestBody ProjectTodo todo, @PathVariable Long task_id  , @PathVariable Long todo_id){
+		System.out.println("todo: "+todo.toString());
+		
+	ProjectTodo updatedTodo = toDoService.updateTodo(todo, task_id, todo_id);
+	return new ResponseEntity<ProjectTodo>(updatedTodo,HttpStatus.OK);
 	}
 }

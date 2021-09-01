@@ -24,8 +24,6 @@ public class ProjectTodoService {
 		return toDoRepository.findByProjectTask_IdOrderByPriority(id);
 	}
 	
-	
-	
 	public ProjectTodo registerProjectTodo(ProjectTodo todo,Long id) {
 		try {
 		ProjectTask task = taskRepository.findById(id).orElseThrow(()->new IllegalArgumentException("id 없음"));
@@ -37,6 +35,19 @@ public class ProjectTodoService {
 			//throw new notfoundExcpetion
 			return null;
 		}
+	}
+	
+	public ProjectTodo getOneTodo(Long task_id , Long todo_id) {
+		return toDoRepository.findByProjectTask_IdAndId(task_id, todo_id);
+	}
+	
+	public ProjectTodo updateTodo(ProjectTodo projectTodo, Long task_id , Long todo_id) {
+		System.out.println("t id: "+task_id);
+		ProjectTodo todo = getOneTodo(task_id, todo_id);
+		System.out.println(todo.toString());
+		todo = projectTodo;
+		
+		return toDoRepository.save(todo);
 	}
 	
 	public void deleteTodo(Long task_id, Long todo_id) {
