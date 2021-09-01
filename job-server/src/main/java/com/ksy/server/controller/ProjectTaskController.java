@@ -65,7 +65,12 @@ public class ProjectTaskController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateTask(@RequestBody ProjectTask task,@PathVariable Long id){
+	public ResponseEntity<?> updateTask(@Valid @RequestBody ProjectTask task,@PathVariable Long id,BindingResult result){
+		ResponseEntity<?> errorMap = errorService.ValidationService(result);
+		if(errorMap != null) {
+			return errorMap;
+		}else {
 		return new ResponseEntity<ProjectTask>(projectTaskService.updateById(task, id),HttpStatus.OK);
+		}
 	}
 }

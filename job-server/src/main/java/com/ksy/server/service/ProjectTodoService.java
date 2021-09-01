@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.ksy.server.domain.ProjectTask;
 import com.ksy.server.domain.ProjectTodo;
+import com.ksy.server.exception.CustomExceptionHandler;
+import com.ksy.server.exception.CustomIdException;
 import com.ksy.server.repository.ProjectTaskRepository;
 import com.ksy.server.repository.ProjectTodoRepository;
 
@@ -26,7 +28,9 @@ public class ProjectTodoService {
 	
 	public ProjectTodo registerProjectTodo(ProjectTodo todo,Long id) {
 		try {
-		ProjectTask task = taskRepository.findById(id).orElseThrow(()->new IllegalArgumentException("id 없음"));
+		ProjectTask task = taskRepository.findById(id).orElseThrow(()->{
+			throw new CustomIdException("id를 확인");
+			});
 		todo.setProjectTask(task);
 		
 		return toDoRepository.save(todo);
@@ -42,9 +46,8 @@ public class ProjectTodoService {
 	}
 	
 	public ProjectTodo updateTodo(ProjectTodo projectTodo, Long task_id , Long todo_id) {
-		System.out.println("t id: "+task_id);
+		
 		ProjectTodo todo = getOneTodo(task_id, todo_id);
-		System.out.println(todo.toString());
 		todo = projectTodo;
 		
 		return toDoRepository.save(todo);

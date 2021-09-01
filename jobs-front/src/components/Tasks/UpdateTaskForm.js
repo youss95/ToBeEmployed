@@ -11,6 +11,9 @@ const UpdateTaskForm = (props) => {
   });
   const id = props.match.params.id;
 
+  const [nullNameCheck, setNullNameCheck] = useState(false);
+  const [nullContCheck, setNullContCheck] = useState(false);
+
   useEffect(() => {
     axios
       .get('http://localhost:8080/api/task/chosen/' + id)
@@ -33,6 +36,17 @@ const UpdateTaskForm = (props) => {
 
   const submitTask = (e) => {
     e.preventDefault();
+    if (!task.projectName) {
+      //alert('프로젝트 이름이 필요합니다.');
+      setNullNameCheck(true);
+    } else if (task.projectName !== null) {
+      setNullNameCheck(false);
+    }
+    if (!task.content) {
+      setNullContCheck(true);
+    } else if (task.content !== null) {
+      setNullContCheck(false);
+    }
     const headers = {
       'Content-Type': 'application/json;charset=utf-8',
     };
@@ -44,7 +58,12 @@ const UpdateTaskForm = (props) => {
         props.history.push('/');
       })
       .catch((err) => {
-        console.log(err);
+        let errorName = err.response.data;
+        if (errorName.projectName === undefined) {
+          alert(errorName.content);
+        } else {
+          alert(errorName.projectName);
+        }
       });
   };
 
@@ -62,6 +81,7 @@ const UpdateTaskForm = (props) => {
           onChange={changeValue}
           value={task.projectName}
         />
+        {nullNameCheck && <div className="nullCheck">이름을 입력해 주세요</div>}
         <dt>내용</dt>
 
         <textarea
@@ -74,7 +94,7 @@ const UpdateTaskForm = (props) => {
           value={task.content}
           onChange={changeValue}
         />
-
+        {nullContCheck && <div className="nullCheck">내용을 입력해 주세요</div>}
         <dt>카테고리</dt>
         <input
           type="text"

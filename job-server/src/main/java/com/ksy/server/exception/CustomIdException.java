@@ -19,6 +19,10 @@ public class CustomIdException extends RuntimeException{
 		this.errorMap = errorMap;
 	}
 	
+	public CustomIdException(String message) {
+		super(message);
+	}
+	
 	public Map<String,String> getErrorMap(){
 		return errorMap;
 	}

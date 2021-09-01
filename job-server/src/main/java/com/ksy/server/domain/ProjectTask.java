@@ -26,8 +26,6 @@ public class ProjectTask {
 	private Long id;
 	@NotBlank(message = "프로젝트 이름을 입력")
 	private String projectName;
-	private String prjIdentifier;
-	private Integer taskSeq = 0;
 	@NotBlank(message = "내용을 입력")
 	private String content;
 	@NotBlank(message = "category 필요")
