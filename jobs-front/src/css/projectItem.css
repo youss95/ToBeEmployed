@@ -23,3 +23,19 @@
 .btn {
   margin-left: 5px;
 }
+
+.card-title {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.card-text {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.categoryTitle {
+  font-size: 35px;
+  font-weight: 600;
+  color: white;
+}

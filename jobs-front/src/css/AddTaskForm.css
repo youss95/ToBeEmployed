@@ -4,6 +4,10 @@
   margin: auto;
 }
 
+.nullCheck {
+  color: red;
+}
+
 .inpform {
   width: 100%;
   height: 40px;

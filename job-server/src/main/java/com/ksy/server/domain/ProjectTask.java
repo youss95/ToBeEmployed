@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -23,10 +24,13 @@ public class ProjectTask {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank(message = "프로젝트 이름을 입력")
 	private String projectName;
 	private String prjIdentifier;
 	private Integer taskSeq = 0;
+	@NotBlank(message = "내용을 입력")
 	private String content;
+	@NotBlank(message = "category 필요")
 	private String category;
 	@JsonFormat(pattern="yyyy-mm-dd")
 	private Date startDate;
