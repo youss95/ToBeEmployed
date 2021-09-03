@@ -9,8 +9,22 @@ import UpdateTaskForm from './components/Tasks/UpdateTaskForm';
 import AddTodoForm from './components/Todo/AddTodoForm';
 import Todo from './components/Todo/Todo';
 import UpdateTodo from './components/Todo/UpdateTodo';
+import LoginForm from './components/users/LoginForm';
+import RegisterForm from './components/users/RegisterForm';
+import { login } from './store';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let jwtToken = localStorage.getItem('Authorization');
+    if (jwtToken !== null) {
+      dispatch(login());
+    }
+  }, []);
+
   return (
     <div>
       <Header />
@@ -20,6 +34,8 @@ function App() {
       <Route path="/updateTask/:id" exact={true} component={UpdateTaskForm} />
       <Route path="/addTodo/:id" exact={true} component={AddTodoForm} />
       <Route path="/todo/detail/:id" exact={true} component={Todo} />
+      <Route path="/user/login" exact={true} component={LoginForm} />
+      <Route path="/user/register" exact={true} component={RegisterForm} />
       <Route
         path="/todo/update/:task_id/:id"
         exact={true}

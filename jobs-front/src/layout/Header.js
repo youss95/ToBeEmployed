@@ -1,7 +1,16 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../css/style.css';
+import { logout } from '../store';
 const Header = () => {
+  const isLogin = useSelector((store) => store.isLogin);
+  const dispatch = useDispatch();
+  console.log(isLogin);
+  const logoutProc = () => {
+    localStorage.removeItem('Authorization');
+    dispatch(logout());
+  };
   return (
     <div>
       <header className="header">
@@ -18,16 +27,28 @@ const Header = () => {
             </li>
           </ul>
         </div>
+
         <div className="utils">
           <ul className="clear">
-            <li>
-              <Link to="#">로그인</Link>
-            </li>
-            <li>
-              <Link to="#">회원가입</Link>
-            </li>
+            {isLogin ? (
+              <>
+                <li>
+                  <Link onClick={logoutProc}>로그아웃</Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link to={`/user/login`}>로그인</Link>
+                </li>
+                <li>
+                  <Link to={`/user/register`}>회원가입</Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
+
         <div className="s_menu_bg"></div>
       </header>
     </div>

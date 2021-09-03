@@ -37,6 +37,7 @@ const AddTaskForm = (props) => {
     }
     const headers = {
       'Content-Type': 'application/json;charset=utf-8',
+      'Access-Control-Allow-Origin': 'http://localhost:8080',
     };
     axios
       .post('http://localhost:8080/api/task/', task, { headers })
@@ -46,7 +47,7 @@ const AddTaskForm = (props) => {
         props.history.push('/');
       })
       .catch((err) => {
-        let errorName = err.response.data;
+        /*  let errorName = err.response.data;
         console.log(errorName.projectName);
         console.log(err.response.data.content);
 
@@ -54,7 +55,7 @@ const AddTaskForm = (props) => {
           alert(errorName.content);
         } else {
           alert(errorName.projectName);
-        }
+        } */
       });
   };
 
