@@ -12,20 +12,31 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ksy.server.domain.User;
+import com.ksy.server.dto.AuthenticationRequest;
 import com.ksy.server.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
 
 
 public class JwtAuthenticationFilter implements Filter{
 
 	private UserRepository personRepository;
 	
-	public JwtAuthenticationFilter(UserRepository personRepository) {
+	
+	private  BCryptPasswordEncoder passwordEncoder;
+	
+	public JwtAuthenticationFilter(UserRepository personRepository , BCryptPasswordEncoder passwordEncoder) {
 		this.personRepository = personRepository;
+		this.passwordEncoder = passwordEncoder;
 	}
 	
 	@Override
@@ -44,12 +55,15 @@ public class JwtAuthenticationFilter implements Filter{
 			out.flush();
 		}else {
 			ObjectMapper om = new ObjectMapper();
+			AuthenticationRequest authDto = null ;
 			try {
-				User person = om.readValue(req.getInputStream(), User.class);
-
+				authDto = om.readValue(req.getInputStream(), AuthenticationRequest.class);
+				
+				System.out.println(authDto);
+				User getUserPw = 
+				personRepository.findByUsername(authDto.getUsername());
 				User personEntity = 
-				personRepository.findByUsernameAndPassword(person.getUsername(), person.getPassword());
-
+						personRepository.findByUsernameAndPassword(authDto.getUsername(), getUserPw.getPassword());
 				if(personEntity == null) {
 					out.print("fail");
 					out.flush();

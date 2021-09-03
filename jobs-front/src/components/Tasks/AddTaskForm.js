@@ -1,6 +1,8 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import '../../css/AddTaskForm.css';
+import jwt_decode from 'jwt-decode';
 const AddTaskForm = (props) => {
   const category = props.match.params.category;
 
@@ -21,6 +23,17 @@ const AddTaskForm = (props) => {
     });
     console.log(e.target.value);
   };
+
+  const [userId, setUserId] = useState();
+
+  const isLogin = useSelector((store) => store.isLogin);
+  console.log(isLogin);
+  useEffect(() => {
+    if (!isLogin) {
+      alert('로그인을 해주세요!');
+      props.history.push('/todo');
+    }
+  }, []);
 
   const submitTask = (e) => {
     e.preventDefault();
@@ -47,7 +60,7 @@ const AddTaskForm = (props) => {
         props.history.push('/');
       })
       .catch((err) => {
-        /*  let errorName = err.response.data;
+        let errorName = err.response.data;
         console.log(errorName.projectName);
         console.log(err.response.data.content);
 
@@ -55,7 +68,7 @@ const AddTaskForm = (props) => {
           alert(errorName.content);
         } else {
           alert(errorName.projectName);
-        } */
+        }
       });
   };
 

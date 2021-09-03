@@ -1,6 +1,7 @@
 package com.ksy.server.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,10 +28,14 @@ public class UserController {
 	private final UserRepository personRepository;
 	private final HttpSession session;
 	private final UserService userService;
-	
+	private final ErrorValidationService errorService;
 	@PostMapping("/join")
-	public ResponseEntity<?> join(@RequestBody User person) {
+	public ResponseEntity<?> join(@Valid @RequestBody User person,BindingResult result) {
 		
+		ResponseEntity<?> errorMap = errorService.ValidationService(result);
+		if(errorMap != null) {
+			return errorMap;
+		}
 		userService.registerUser(person);
 		return new ResponseEntity<String>("ok", HttpStatus.CREATED);
 	}

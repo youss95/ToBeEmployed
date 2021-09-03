@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,7 +32,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(unique = true)
+	@Size(min=4,max=8,message = "4~8자 사이")
+	@NotBlank(message = "빈칸은 안되요")
 	private String username;
+	@NotBlank(message = "빈칸은 안되요")
 	private String password;
 	@JsonFormat(pattern="yyyy-mm-dd")
 	private Date createDate;

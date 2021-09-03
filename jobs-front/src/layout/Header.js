@@ -10,20 +10,21 @@ const Header = () => {
   const logoutProc = () => {
     localStorage.removeItem('Authorization');
     dispatch(logout());
+    window.location.href = '/';
   };
   return (
     <div>
       <header className="header">
         <h1 className="logo">
-          <Link to="#">LOGO IMG</Link>
+          <Link to={'/'}>LOGO IMG</Link>
         </h1>
         <div className="gnb">
           <ul className="clear">
             <li className="has">
-              <Link to="/todo">일정</Link>
+              <Link to={'/todo'}>일정</Link>
             </li>
             <li className="has">
-              <Link to="#">Map</Link>
+              <Link to={'/'}>Map</Link>
             </li>
           </ul>
         </div>

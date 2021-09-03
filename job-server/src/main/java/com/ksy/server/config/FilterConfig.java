@@ -3,6 +3,8 @@ package com.ksy.server.config;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.ksy.server.config.filter.CorsFilter;
 import com.ksy.server.config.jwt.JwtAuthenticationFilter;
@@ -15,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class FilterConfig {
 
 	private final UserRepository personRepository;
-	
+	private final BCryptPasswordEncoder passwordEncoder;
 	@Bean
 	public FilterRegistrationBean<CorsFilter> corsFilter(){
 		System.out.println("CORS 필터 등록");
@@ -29,7 +31,7 @@ public class FilterConfig {
 	public FilterRegistrationBean<JwtAuthenticationFilter> jwtAuthenticationFilter(){
 		System.out.println("JwtAuthenticationFilter 필터 등록");
 		FilterRegistrationBean<JwtAuthenticationFilter> bean = 
-				new FilterRegistrationBean<>(new JwtAuthenticationFilter(personRepository));
+				new FilterRegistrationBean<>(new JwtAuthenticationFilter(personRepository,passwordEncoder));
 		bean.addUrlPatterns("/login");
 		bean.setOrder(1); // 낮은 번호부터 실행됨.
 		return bean;

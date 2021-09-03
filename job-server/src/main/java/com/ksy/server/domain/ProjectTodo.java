@@ -53,8 +53,9 @@ public class ProjectTodo {
 	
 	//.외래키 연관관계주인
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="task_id",updatable = false, nullable=false)
+	@JoinColumn(name="taskId",updatable = false, nullable=false)
 	private ProjectTask projectTask;
+	
 	
 	@PrePersist
 	protected void onCreate() {

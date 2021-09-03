@@ -49,7 +49,7 @@ const LoginForm = (props) => {
   return (
     <Form className="loginForm">
       <Form.Group>
-        <Form.Label>Username</Form.Label>
+        <Form.Label>아이디</Form.Label>
         <Form.Control
           type="text"
           placeholder="Enter username"
@@ -59,7 +59,7 @@ const LoginForm = (props) => {
       </Form.Group>
 
       <Form.Group>
-        <Form.Label>Password</Form.Label>
+        <Form.Label>비밀번호</Form.Label>
         <Form.Control
           type="password"
           placeholder="Enter password"
