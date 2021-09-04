@@ -21,7 +21,7 @@ const TodoItems = (props) => {
         .delete(`http://localhost:8080/api/todo/${props.task_id}/${id}`)
         .then((res) => {
           if (res.status === 200) {
-            window.location.replace(`/todo/detail/${props.task_id}`);
+            window.location.replace(`/list/detail/${props.task_id}`);
           } else {
             alert('삭제에 실패');
           }

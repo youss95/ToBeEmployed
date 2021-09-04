@@ -55,7 +55,7 @@ const AddTodoForm = (props) => {
       .then((res) => {
         console.log(res.data);
         setTodo(res.data);
-        props.history.push('/');
+        props.history.push('/todo');
       })
       .catch((err) => {
         console.log(err);

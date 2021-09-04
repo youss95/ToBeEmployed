@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import '../../css/mymap.css';
 const { kakao } = window;
 const MyMap = () => {
@@ -77,6 +78,9 @@ const MyMap = () => {
           placeholder="주소를 검색해 보세요"
         />{' '}
         <Button>검색</Button>
+        <Link class="btn btn-primary" to={`/map/add`}>
+          추가
+        </Link>
       </div>
       <div
         className="map"

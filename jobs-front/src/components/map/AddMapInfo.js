@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import '../../css/addmap.css';
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 const { kakao } = window;
 
-const AddMapInfo = () => {
-  const [clickedAdd, setAdd] = useState({
-    content: '',
-    bizName: '',
-    address: '',
-  });
+const AddMapInfo = (props) => {
   const [findAddr, setFind] = useState({
     findAddress: '',
   });
-
+  const [clickedAdd, setAdd] = useState({
+    content: '',
+    bizName: '',
+    interviewDate: '',
+    address: '',
+  });
+  console.log(findAddr.findAddress);
+  console.log(clickedAdd.address);
   const [nullAddCheck, setAddCheck] = useState(false);
-
+  const [userId, setUsername] = useState();
   const changeValue = (e) => {
     setAdd({
       ...clickedAdd,
@@ -29,6 +33,30 @@ const AddMapInfo = () => {
       [e.target.name]: e.target.value,
     });
     console.log(e.target.value);
+  };
+
+  useEffect(() => {
+    let jwtTokenTemp = localStorage.getItem('Authorization');
+    let jwtToken = jwtTokenTemp.replace('Bearer ', '');
+
+    setUsername(jwt_decode(jwtToken).id);
+  }, []);
+
+  const submitMap = (e) => {
+    e.preventDefault();
+    const headers = {
+      'Content-Type': 'application/json;charset=utf-8',
+    };
+    axios
+      .post(`http://localhost:8080/api/map/${userId}`, clickedAdd, { headers })
+      .then((res) => {
+        console.log(res.data);
+        setAdd(res.data);
+        props.history.push('/');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   //주소검색
@@ -80,9 +108,7 @@ const AddMapInfo = () => {
             '</div>';
 
           console.log('지번주소:', result[0].address.address_name);
-          let address = result[0].address.address_name;
-          setAdd(address);
-          setAddCheck(true);
+
           marker.setPosition(mouseEvent.latLng);
           marker.setMap(map);
 
@@ -160,7 +186,7 @@ const AddMapInfo = () => {
 
           console.log('지번주소:', result[0].address.address_name);
           let address = result[0].address.address_name;
-          setAdd(address);
+          setAdd({ ...clickedAdd, address: address });
           setAddCheck(true);
           marker.setPosition(mouseEvent.latLng);
           marker.setMap(map);
@@ -192,7 +218,7 @@ const AddMapInfo = () => {
   return (
     <div>
       <div className="addmap">
-        <form className="mapForm">
+        <form className="mapForm" onSubmit={submitMap}>
           <div className="eleTitle">회사이름</div>
           <input
             type="text"
@@ -209,13 +235,27 @@ const AddMapInfo = () => {
             name="content"
             onChange={changeValue}
           />
+          <div className="eleTitle">날짜</div>
+          <div className="interviewDate">
+            <input
+              type="date"
+              className="addform"
+              name="interviewDate"
+              onChange={changeValue}
+            />
+          </div>
           <div className="eleTitle">위치</div>
           <input
             type="text"
             class="addform"
             name="address"
-            value={nullAddCheck ? clickedAdd : '맵을 클릭하여 주소입력'}
+            value={nullAddCheck ? clickedAdd.address : '맵을 클릭하여 주소입력'}
             disabled
+          />
+          <input
+            type="submit"
+            className="btn btn-primary btn-lg subBtn"
+            value="등록"
           />
         </form>
         <input
@@ -226,6 +266,7 @@ const AddMapInfo = () => {
           onChange={changeAdd}
         />
         <Button onClick={findAdd}>검색</Button>
+
         <div
           className="map"
           id="map"

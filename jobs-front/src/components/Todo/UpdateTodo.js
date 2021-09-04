@@ -63,7 +63,7 @@ const UpdateTodo = (props) => {
       .then((res) => {
         console.log(res.data);
         setUpdateTodo(res.data);
-        props.history.push('/todo/detail/' + task_id);
+        props.history.push('/list/detail/' + task_id);
       });
   };
 
