@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
 import { BsFillLayersFill, BsGraphUp, BsPen, BsPencil } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import '../../css/projectItem.css';
+import jwt_decode from 'jwt-decode';
 const ProjectItem = () => {
+  const [userId, setUsername] = useState();
+
+  useEffect(() => {
+    let jwtTokenTemp = localStorage.getItem('Authorization');
+    let jwtToken = jwtTokenTemp.replace('Bearer ', '');
+
+    setUsername(jwt_decode(jwtToken).id);
+  }, []);
+
   return (
     <div className="backGround">
       <div className="pItem">
@@ -17,8 +27,8 @@ const ProjectItem = () => {
               <p className="card-text">
                 make a simple to-do list about work !!
               </p>
-              <Link to={'/todo/work'} className="btn btn-primary">
-                일정 보기
+              <Link to={`/todo/work/${userId}`} className="btn btn-primary">
+                일정 보기{userId}
               </Link>
               <Link to={'/addTask/work'} className="btn btn-primary">
                 일정 추가

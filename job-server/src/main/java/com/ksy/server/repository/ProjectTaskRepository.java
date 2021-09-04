@@ -8,6 +8,6 @@ import com.ksy.server.domain.ProjectTask;
 
 public interface ProjectTaskRepository extends JpaRepository<ProjectTask, Long> {
 
-	List<ProjectTask> findByCategory(String category);
+	List<ProjectTask> findByCategoryAndUser_userId(String category,int userId);
 	
 }

@@ -21,8 +21,8 @@ public class ProjectTaskService {
 	private ProjectTaskRepository projectTaskRepository;
 	@Autowired
 	private UserRepository userRepository;
-	public List<ProjectTask> findByCategory(String category){
-		return projectTaskRepository.findByCategory(category);
+	public List<ProjectTask> findByCategory(String category, int userId){
+		return projectTaskRepository.findByCategoryAndUser_userId(category, userId);
 	}
 	
 	@Transactional

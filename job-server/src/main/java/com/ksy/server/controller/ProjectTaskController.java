@@ -47,9 +47,9 @@ public class ProjectTaskController {
 		}
 	}
 	
-	@GetMapping("/{category}")
-	public List<?> getTaskByCategory(@PathVariable String category){
-		return projectTaskService.findByCategory(category);
+	@GetMapping("/{category}/{userId}")
+	public List<?> getTaskByCategory(@PathVariable String category,@PathVariable int userId){
+		return projectTaskService.findByCategory(category, userId);
 	}
 	
 	

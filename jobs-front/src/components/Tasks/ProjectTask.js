@@ -2,13 +2,16 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import '../../css/task.css';
 import TaskItems from './TaskItems';
+
 const ProjectTask = (props) => {
   const category = props.match.params.category;
+  const userId = props.match.params.userId;
   const [task, setTask] = useState([]);
 
+  console.log('userId', userId);
   useEffect(() => {
     axios
-      .get('http://localhost:8080/api/task/' + category)
+      .get(`http://localhost:8080/api/task/${category}/${userId}`)
       .then((res) => {
         console.log(res.data);
         setTask(res.data);

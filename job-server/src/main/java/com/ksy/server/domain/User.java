@@ -30,7 +30,7 @@ import lombok.NoArgsConstructor;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int userId;
 	@Column(unique = true)
 	@Size(min=4,max=8,message = "4~8자 사이")
 	@NotBlank(message = "빈칸은 안되요")

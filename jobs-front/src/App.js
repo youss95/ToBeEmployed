@@ -22,6 +22,7 @@ function App() {
 
   useEffect(() => {
     let jwtToken = localStorage.getItem('Authorization');
+
     if (jwtToken !== null) {
       dispatch(login());
     }
@@ -31,7 +32,11 @@ function App() {
     <div>
       <Header />
       <Route path="/todo/" exact={true} component={ProjectItem} />
-      <Route path="/todo/:category" exact={true} component={ProjectTask} />
+      <Route
+        path="/todo/:category/:userId"
+        exact={true}
+        component={ProjectTask}
+      />
       <Route path="/addTask/:category" exact={true} component={AddTaskForm} />
       <Route path="/updateTask/:id" exact={true} component={UpdateTaskForm} />
       <Route path="/addTodo/:id" exact={true} component={AddTodoForm} />
