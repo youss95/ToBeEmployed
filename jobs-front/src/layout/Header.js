@@ -24,7 +24,7 @@ const Header = () => {
               <Link to={'/todo'}>일정</Link>
             </li>
             <li className="has">
-              <Link to={'/'}>Map</Link>
+              <Link to={'/map'}>Map</Link>
             </li>
           </ul>
         </div>

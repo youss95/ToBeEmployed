@@ -9,22 +9,28 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ksy.server.domain.ProjectTask;
+import com.ksy.server.domain.User;
 import com.ksy.server.exception.CustomIdException;
 import com.ksy.server.repository.ProjectTaskRepository;
+import com.ksy.server.repository.UserRepository;
 
 @Service
 public class ProjectTaskService {
 
 	@Autowired
 	private ProjectTaskRepository projectTaskRepository;
-	
+	@Autowired
+	private UserRepository userRepository;
 	public List<ProjectTask> findByCategory(String category){
 		return projectTaskRepository.findByCategory(category);
 	}
 	
 	@Transactional
-	public ProjectTask saveProject(ProjectTask projectTask) {
-	
+	public ProjectTask saveProject(ProjectTask projectTask, int userId) {
+		User user = userRepository.findById(userId).orElseThrow(()->{
+			throw new CustomIdException("없는 id");
+		});
+		projectTask.setUser(user);
 		return projectTaskRepository.save(projectTask);
 	}
 	

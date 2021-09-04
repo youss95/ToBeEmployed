@@ -34,15 +34,15 @@ public class ProjectTaskController {
 	@Autowired
 	private ErrorValidationService errorService;
 	
-	@PostMapping("/")
-	public ResponseEntity<?> createNewTask(@Valid @RequestBody ProjectTask task, BindingResult result){
+	@PostMapping("/{userId}")
+	public ResponseEntity<?> createNewTask(@Valid @RequestBody ProjectTask task,@PathVariable int userId , BindingResult result){
 		
 		ResponseEntity<?> errorMap = errorService.ValidationService(result);
 		if(errorMap !=null) {
 			return errorMap;
 		}else {
 		
-		ProjectTask projectTask = projectTaskService.saveProject(task);
+		ProjectTask projectTask = projectTaskService.saveProject(task,userId);
 		return new ResponseEntity<ProjectTask>(projectTask,HttpStatus.CREATED);
 		}
 	}

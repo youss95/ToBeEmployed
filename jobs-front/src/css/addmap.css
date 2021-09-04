@@ -1,0 +1,21 @@
+.addmap {
+  width: 1400px;
+  padding-top: 140px;
+  margin: auto;
+}
+
+.addform {
+  width: 70%;
+  height: 40px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  border: 1px solid #769fcd;
+  color: #333;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  margin-left: 200px;
+}
+
+dt {
+  margin-left: 200px;
+}

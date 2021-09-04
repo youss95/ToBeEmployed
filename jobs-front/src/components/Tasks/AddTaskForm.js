@@ -23,12 +23,15 @@ const AddTaskForm = (props) => {
     });
     console.log(e.target.value);
   };
-
-  const [userId, setUserId] = useState();
-
+  const [userId, setUsername] = useState();
+  console.log('user', userId);
   const isLogin = useSelector((store) => store.isLogin);
   console.log(isLogin);
   useEffect(() => {
+    let jwtTokenTemp = localStorage.getItem('Authorization');
+    let jwtToken = jwtTokenTemp.replace('Bearer ', '');
+
+    setUsername(jwt_decode(jwtToken).id);
     if (!isLogin) {
       alert('로그인을 해주세요!');
       props.history.push('/todo');
@@ -50,10 +53,9 @@ const AddTaskForm = (props) => {
     }
     const headers = {
       'Content-Type': 'application/json;charset=utf-8',
-      'Access-Control-Allow-Origin': 'http://localhost:8080',
     };
     axios
-      .post('http://localhost:8080/api/task/', task, { headers })
+      .post('http://localhost:8080/api/task/' + userId, task, { headers })
       .then((res) => {
         console.log(res.data);
         setTask(res.data);
@@ -75,7 +77,7 @@ const AddTaskForm = (props) => {
   return (
     <div>
       <div className="addForm">
-        <h3>일정을 추가해 주세요!</h3>
+        <h3>일정을 추가해 주세요!!</h3>
         <br />
         <form onSubmit={submitTask}>
           <dt>프로젝트 이름</dt>

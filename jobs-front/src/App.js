@@ -14,6 +14,8 @@ import RegisterForm from './components/users/RegisterForm';
 import { login } from './store';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import MyMap from './components/map/MyMap';
+import AddMapInfo from './components/map/AddMapInfo';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +38,8 @@ function App() {
       <Route path="/todo/detail/:id" exact={true} component={Todo} />
       <Route path="/user/login" exact={true} component={LoginForm} />
       <Route path="/user/register" exact={true} component={RegisterForm} />
+      <Route path="/map" exact={true} component={MyMap} />
+      <Route path="/map/add" exact={true} component={AddMapInfo} />
       <Route
         path="/todo/update/:task_id/:id"
         exact={true}

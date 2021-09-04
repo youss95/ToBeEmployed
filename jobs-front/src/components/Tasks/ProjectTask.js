@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import '../../css/task.css';
 import TaskItems from './TaskItems';
 const ProjectTask = (props) => {
   const category = props.match.params.category;
   const [task, setTask] = useState([]);
+
   useEffect(() => {
     axios
       .get('http://localhost:8080/api/task/' + category)

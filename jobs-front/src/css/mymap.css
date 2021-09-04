@@ -1,15 +1,18 @@
-.addForm {
+.mymap {
   width: 1400px;
   padding-top: 140px;
   margin: auto;
 }
-
-.nullCheck {
-  color: red;
+.map {
+  margin: auto;
+}
+.searchInput {
+  margin-left: 50px;
+  margin-bottom: 10px;
 }
 
 .inpform {
-  width: 100%;
+  width: 80%;
   height: 40px;
   padding: 0 10px;
   box-sizing: border-box;
@@ -48,35 +51,4 @@ textarea:disabled {
 input:disabled {
   height: 40px;
   padding: 0 10px;
-}
-
-.txtareaform {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #769fcd;
-  resize: none;
-  border-radius: 5px;
-  line-height: 1.5;
-}
-.txtareaform:focus {
-  border-color: #254e7c;
-}
-.txtareaform::-webkit-input-placeholder,
-.txtareaform::-moz-placeholder,
-.txtareaform:-moz-placeholder,
-.txtareaform:-ms-input-placeholder,
-.txtareaform:-o-placeholder {
-  color: #769fcd;
-}
-
-.startDate {
-  width: 500px;
-}
-
-dt {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-.subBtn {
-  float: right;
 }
