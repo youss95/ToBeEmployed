@@ -24,7 +24,7 @@ const ProjectTask = (props) => {
   return (
     <div className="prjTask">
       {task.map((task) => (
-        <TaskItems key={task.id} task={task} />
+        <TaskItems key={task.id} task={task} userId={userId} />
       ))}
     </div>
   );

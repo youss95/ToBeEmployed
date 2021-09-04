@@ -2,6 +2,7 @@ package com.ksy.server.domain;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -52,7 +53,7 @@ public class ProjectTodo {
 	private Date updateDate;
 	
 	//.외래키 연관관계주인
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name="taskId",updatable = false, nullable=false)
 	private ProjectTask projectTask;
 	

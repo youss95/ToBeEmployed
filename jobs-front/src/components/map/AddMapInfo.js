@@ -193,7 +193,7 @@ const AddMapInfo = () => {
     <div>
       <div className="addmap">
         <form className="mapForm">
-          <dt>회사이름</dt>
+          <div className="eleTitle">회사이름</div>
           <input
             type="text"
             className="addform"
@@ -201,7 +201,7 @@ const AddMapInfo = () => {
             name="bizName"
             onChange={changeValue}
           />
-          <dt>내용</dt>
+          <div className="eleTitle">내용</div>
           <input
             type="text"
             className="addform"
@@ -209,7 +209,7 @@ const AddMapInfo = () => {
             name="content"
             onChange={changeValue}
           />
-          <dt>위치</dt>
+          <div className="eleTitle">위치</div>
           <input
             type="text"
             class="addform"

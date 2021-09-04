@@ -40,7 +40,7 @@ function App() {
       <Route path="/addTask/:category" exact={true} component={AddTaskForm} />
       <Route path="/updateTask/:id" exact={true} component={UpdateTaskForm} />
       <Route path="/addTodo/:id" exact={true} component={AddTodoForm} />
-      <Route path="/todo/detail/:id" exact={true} component={Todo} />
+      <Route path="/list/detail/:id" exact={true} component={Todo} />
       <Route path="/user/login" exact={true} component={LoginForm} />
       <Route path="/user/register" exact={true} component={RegisterForm} />
       <Route path="/map" exact={true} component={MyMap} />

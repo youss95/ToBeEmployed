@@ -28,7 +28,7 @@ const ProjectItem = () => {
                 make a simple to-do list about work !!
               </p>
               <Link to={`/todo/work/${userId}`} className="btn btn-primary">
-                일정 보기{userId}
+                일정 보기
               </Link>
               <Link to={'/addTask/work'} className="btn btn-primary">
                 일정 추가
@@ -44,7 +44,7 @@ const ProjectItem = () => {
               <p className="card-text">
                 make a simple to-do list about learning something useful !!
               </p>
-              <Link to={'/todo/learning'} className="btn btn-primary">
+              <Link to={`/todo/learning/${userId}`} className="btn btn-primary">
                 일정 보기
               </Link>
               <Link to={'/addTask/learning'} className="btn btn-primary">
@@ -62,7 +62,7 @@ const ProjectItem = () => {
                 make a simple to-do list about studying something to upgrade
                 your knowledge !!
               </p>
-              <Link to={'/todo/study'} className="btn btn-primary">
+              <Link to={`/todo/study/${userId}`} className="btn btn-primary">
                 일정 보기
               </Link>
               <Link to={'/addTask/study'} className="btn btn-primary">
@@ -79,7 +79,7 @@ const ProjectItem = () => {
                 make a simple to-do list about fitness to build your body and
                 mind more strong !!
               </p>
-              <Link to={'/todo/fitness'} className="btn btn-primary">
+              <Link to={`/todo/fitness/${userId}`} className="btn btn-primary">
                 일정 보기
               </Link>
               <Link to={'/addTask/fitness'} className="btn btn-primary">

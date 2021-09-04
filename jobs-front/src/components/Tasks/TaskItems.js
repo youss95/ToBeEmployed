@@ -38,7 +38,7 @@ const TaskItems = (props) => {
           <p className="card-text">{content}</p>
           <div>끝: {endDate}</div>
           <div className="doBtn">
-            <Link to={`/todo/detail/${id}`} className="btn">
+            <Link to={`/list/detail/${id}`} className="btn">
               일정 <BsArrow90DegLeft />
             </Link>
             <Link to={`/addTodo/${id}`} className="btn">
