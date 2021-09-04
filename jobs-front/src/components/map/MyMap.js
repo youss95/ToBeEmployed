@@ -1,25 +1,35 @@
-import React, { useEffect } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../../css/mymap.css';
+
 const { kakao } = window;
-const MyMap = () => {
+const MyMap = (props) => {
+  const userId = props.match.params.userId;
+  const [mapList, setList] = useState([]);
   useEffect(() => {
+    axios.get(`http://localhost:8080/api/map/${userId}`).then((res) => {
+      console.log(res.data);
+      setList(res.data);
+    });
     let listData = [
       /* */
     ];
     //get으로 불러와서
     /* 이부분은 주소대로 카카오 마커에 찍고 누르면 정보 나옴 */
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < mapList.length; i++) {
       listData.push([
-        '서울 중구 세종대로 110',
-        '<img class="ooh" src="nn.jpg">',
-        '이름은?',
-        '나이는 12',
+        mapList[0].address,
+        mapList[0].bizName,
+        mapList[0].interviewDate,
+        mapList[0].content,
       ]);
     }
 
-    console.log(listData);
+    console.log('sd', mapList[0].address);
+
+    console.log('ld', listData);
     // 맵을 넣을 div
     var mapContainer = document.getElementById('map');
     var mapOption = {
@@ -50,11 +60,14 @@ const MyMap = () => {
           //listData를 여기다가 바인딩
           var infowindow = new kakao.maps.InfoWindow({
             content:
-              '<div style="width:150px;height:300px;text-align:center;padding:6px 0;">' +
+              '<div style="width:300px;height:200px;padding:15px;">' +
+              '<span style="font-size:17px;font-weight:600;">회사명: </span>' +
               addr[1] +
-              '<br><br>' +
+              '<br>' +
+              '<span style="font-size:17px;font-weight:600;">날짜: </span>' +
               addr[2] +
-              '<br><br>' +
+              '<br>' +
+              '<span style="font-size:17px;font-weight:600;">피드백: </span>' +
               addr[3] +
               '</div>',
             removable: true,

@@ -1,5 +1,7 @@
 package com.ksy.server.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.ksy.server.domain.Map;
@@ -23,6 +25,10 @@ public class MapService {
 		});
 		map.setUser(user);
 		return mapRepository.save(map);		
+	}
+	
+	public List<Map> getAllList(int userId){
+		return mapRepository.findByUser_UserId(userId);
 	}
 	
 }

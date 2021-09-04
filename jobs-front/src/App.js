@@ -43,7 +43,7 @@ function App() {
       <Route path="/list/detail/:id" exact={true} component={Todo} />
       <Route path="/user/login" exact={true} component={LoginForm} />
       <Route path="/user/register" exact={true} component={RegisterForm} />
-      <Route path="/map" exact={true} component={MyMap} />
+      <Route path="/map/:userId" exact={true} component={MyMap} />
       <Route path="/map/add" exact={true} component={AddMapInfo} />
       <Route
         path="/todo/update/:task_id/:id"

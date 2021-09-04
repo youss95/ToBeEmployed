@@ -1,8 +1,11 @@
 package com.ksy.server.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +26,12 @@ public class MapController {
 	public ResponseEntity<?> registerMap(@RequestBody Map map,@PathVariable int userId){
 		
 		return new ResponseEntity<Map>(mapService.saveMap(map, userId),HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/{userId}")
+	public ResponseEntity<?> getMapList(@PathVariable int userId){
+		
+		return new ResponseEntity<List<Map>>(mapService.getAllList(userId),HttpStatus.OK);
 	}
 	
 }

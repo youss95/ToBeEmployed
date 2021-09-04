@@ -53,7 +53,8 @@ public class ProjectTaskController {
 	}
 	
 	
-	  @GetMapping("/chosen/{id}") public ResponseEntity<?> getTaskById(@PathVariable Long id){ 
+	  @GetMapping("/chosen/{id}") 
+	  public ResponseEntity<?> getTaskById(@PathVariable Long id){ 
 		  return new ResponseEntity<ProjectTask>(projectTaskService.getTaskById(id),HttpStatus.OK); 
 		  }
 	 

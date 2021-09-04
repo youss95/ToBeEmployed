@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../css/style.css';
 import { logout } from '../store';
+import jwt_decode from 'jwt-decode';
 const Header = () => {
   const isLogin = useSelector((store) => store.isLogin);
   const dispatch = useDispatch();
   console.log(isLogin);
+  const [userId, setUsername] = useState();
+
+  useEffect(() => {
+    let jwtTokenTemp = localStorage.getItem('Authorization');
+    let jwtToken = jwtTokenTemp.replace('Bearer ', '');
+
+    setUsername(jwt_decode(jwtToken).id);
+  }, []);
+
   const logoutProc = () => {
     localStorage.removeItem('Authorization');
     dispatch(logout());
@@ -24,7 +34,7 @@ const Header = () => {
               <Link to={'/todo'}>일정</Link>
             </li>
             <li className="has">
-              <Link to={'/map'}>Map</Link>
+              <Link to={`/map/${userId}`}>Map</Link>
             </li>
           </ul>
         </div>
