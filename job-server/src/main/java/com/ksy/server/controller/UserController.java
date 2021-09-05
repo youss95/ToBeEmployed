@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +45,12 @@ public class UserController {
 	public ResponseEntity<?> logout() {
 		session.invalidate();
 		return new ResponseEntity<String>("ok", HttpStatus.OK);
+	}
+	
+	@PostMapping("/exist/{username}")
+	public ResponseEntity<?> usernameCheck(@PathVariable String username){
+		
+		return new ResponseEntity<Boolean>(userService.usernameExist(username),HttpStatus.OK);
 	}
 	
 }

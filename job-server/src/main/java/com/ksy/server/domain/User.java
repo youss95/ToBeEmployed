@@ -32,9 +32,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
 	@Column(unique = true)
-	@Size(min=4,max=8,message = "4~8자 사이")
+	@Size(min=4,max=8,message = "아이디는 4~8자 사이")
 	@NotBlank(message = "빈칸은 안되요")
 	private String username;
+	
 	@NotBlank(message = "빈칸은 안되요")
 	private String password;
 	@JsonFormat(pattern="yyyy-mm-dd")

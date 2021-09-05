@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import { BsFillLayersFill, BsGraphUp, BsPen, BsPencil } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import '../../css/projectItem.css';
 import jwt_decode from 'jwt-decode';
-const ProjectItem = () => {
+const MainTodo = () => {
   const [userId, setUsername] = useState();
 
   useEffect(() => {
@@ -95,4 +94,4 @@ const ProjectItem = () => {
   );
 };
 
-export default ProjectItem;
+export default MainTodo;

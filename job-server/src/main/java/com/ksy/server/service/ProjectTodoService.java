@@ -1,5 +1,11 @@
 package com.ksy.server.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,4 +63,10 @@ public class ProjectTodoService {
 		ProjectTodo todo = toDoRepository.findByProjectTask_IdAndId(task_id, todo_id);
 		toDoRepository.delete(todo);
 	}
+	
+	public List<ProjectTodo> getMustList(Long taskId) throws ParseException{
+		 LocalDateTime start = LocalDateTime.of(LocalDate.now(), LocalTime.of(0,0,0));
+		  LocalDateTime end = LocalDateTime.of(LocalDate.now(), LocalTime.of(23,59,59));
+		return toDoRepository.findAllByProjectTask_IdAndCreateDateBetween(taskId, start,end);
+}
 }

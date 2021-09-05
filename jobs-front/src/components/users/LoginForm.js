@@ -39,7 +39,7 @@ const LoginForm = (props) => {
         if (res === 'ok') {
           // 로그인 상태 값 리덕스 저장
           dispatch(login());
-          props.history.push('/');
+          window.location.replace('/');
         } else {
           alert('아이디 혹은 비번을 다시 입력하세요!');
         }
@@ -52,7 +52,7 @@ const LoginForm = (props) => {
         <Form.Label>아이디</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Enter username"
+          placeholder="아이디 입력"
           name="username"
           onChange={changeValue}
         />
@@ -62,7 +62,7 @@ const LoginForm = (props) => {
         <Form.Label>비밀번호</Form.Label>
         <Form.Control
           type="password"
-          placeholder="Enter password"
+          placeholder="비밀번호 입력"
           name="password"
           onChange={changeValue}
         />

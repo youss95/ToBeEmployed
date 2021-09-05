@@ -21,3 +21,10 @@
   font-weight: 600;
   font-size: 18px;
 }
+
+.addMapNull {
+  margin-left: 200px;
+  color: red;
+  font-weight: 600;
+  padding: 10px;
+}

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import '../../css/AddTodoForm.css';
 const AddTodoForm = (props) => {
   const id = props.match.params.id;
+
   const [todo, setTodo] = useState({
     title: '',
     content: '',
@@ -55,7 +56,7 @@ const AddTodoForm = (props) => {
       .then((res) => {
         console.log(res.data);
         setTodo(res.data);
-        props.history.push('/todo');
+        props.history.push(`/list/detail/${id}`);
       })
       .catch((err) => {
         console.log(err);

@@ -18,6 +18,8 @@ const AddMapInfo = (props) => {
   console.log(findAddr.findAddress);
   console.log(clickedAdd.address);
   const [nullAddCheck, setAddCheck] = useState(false);
+  const [nullConCheck, setConCheck] = useState(false);
+  const [nullNameCheck, setNameCheck] = useState(false);
   const [userId, setUsername] = useState();
   const changeValue = (e) => {
     setAdd({
@@ -44,6 +46,21 @@ const AddMapInfo = (props) => {
 
   const submitMap = (e) => {
     e.preventDefault();
+    if (!clickedAdd.address) {
+      setAddCheck(true);
+    } else if (clickedAdd.address !== null) {
+      setAddCheck(false);
+    }
+    if (!clickedAdd.bizName) {
+      setNameCheck(true);
+    } else if (clickedAdd.bizName !== null) {
+      setNameCheck(false);
+    }
+    if (!clickedAdd.content) {
+      setConCheck(true);
+    } else if (clickedAdd.content !== null) {
+      setConCheck(false);
+    }
     const headers = {
       'Content-Type': 'application/json;charset=utf-8',
     };
@@ -52,7 +69,7 @@ const AddMapInfo = (props) => {
       .then((res) => {
         console.log(res.data);
         setAdd(res.data);
-        props.history.push('/');
+        props.history.push(`/map/${userId}`);
       })
       .catch((err) => {
         console.log(err);
@@ -108,6 +125,8 @@ const AddMapInfo = (props) => {
             '</div>';
 
           console.log('지번주소:', result[0].address.address_name);
+          let address = result[0].address.address_name;
+          setAdd({ ...clickedAdd, address: address });
 
           marker.setPosition(mouseEvent.latLng);
           marker.setMap(map);
@@ -187,7 +206,7 @@ const AddMapInfo = (props) => {
           console.log('지번주소:', result[0].address.address_name);
           let address = result[0].address.address_name;
           setAdd({ ...clickedAdd, address: address });
-          setAddCheck(true);
+
           marker.setPosition(mouseEvent.latLng);
           marker.setMap(map);
 
@@ -219,6 +238,24 @@ const AddMapInfo = (props) => {
     <div>
       <div className="addmap">
         <form className="mapForm" onSubmit={submitMap}>
+          <div className="eleTitle">위치</div>
+          <input
+            type="text"
+            className="addform"
+            name="findAddress"
+            placeholder="주소를 검색해 보세요"
+            onChange={changeAdd}
+          />
+          <Button onClick={findAdd}>검색</Button>
+
+          <div
+            className="map"
+            id="map"
+            style={{ width: '1000px', height: '400px' }}
+          ></div>
+          {nullAddCheck && (
+            <div className="addMapNull">주소를 클릭하여 선택해주세요!</div>
+          )}
           <div className="eleTitle">회사이름</div>
           <input
             type="text"
@@ -227,6 +264,9 @@ const AddMapInfo = (props) => {
             name="bizName"
             onChange={changeValue}
           />
+          {nullNameCheck && (
+            <div className="addMapNull">회사이름을 입력해 주세요</div>
+          )}
           <div className="eleTitle">내용</div>
           <input
             type="text"
@@ -235,6 +275,9 @@ const AddMapInfo = (props) => {
             name="content"
             onChange={changeValue}
           />
+          {nullConCheck && (
+            <div className="addMapNull">내용을 입력해 주세요</div>
+          )}
           <div className="eleTitle">날짜</div>
           <div className="interviewDate">
             <input
@@ -244,34 +287,20 @@ const AddMapInfo = (props) => {
               onChange={changeValue}
             />
           </div>
-          <div className="eleTitle">위치</div>
-          <input
+
+          {/*  <input
             type="text"
             class="addform"
             name="address"
             value={nullAddCheck ? clickedAdd.address : '맵을 클릭하여 주소입력'}
             disabled
-          />
+          /> */}
           <input
             type="submit"
             className="btn btn-primary btn-lg subBtn"
             value="등록"
           />
         </form>
-        <input
-          type="text"
-          className="addform"
-          name="findAddress"
-          placeholder="주소를 검색해 보세요"
-          onChange={changeAdd}
-        />
-        <Button onClick={findAdd}>검색</Button>
-
-        <div
-          className="map"
-          id="map"
-          style={{ width: '1000px', height: '400px' }}
-        ></div>
       </div>
     </div>
   );

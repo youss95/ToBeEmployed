@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,17 @@ public class MapController {
 	public ResponseEntity<?> getMapList(@PathVariable int userId){
 		
 		return new ResponseEntity<List<Map>>(mapService.getAllList(userId),HttpStatus.OK);
+	}
+	
+	@GetMapping("/one/{id}")
+	public ResponseEntity<?> getMap(@PathVariable int id){
+		return new ResponseEntity<Map>(mapService.getMap(id),HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteMap(@PathVariable int id){
+		mapService.deleteMpaById(id);
+		return new ResponseEntity<String>("deleted",HttpStatus.OK);
 	}
 	
 }

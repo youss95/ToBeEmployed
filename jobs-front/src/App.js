@@ -1,7 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import Header from './layout/Header';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import ProjectItem from './components/Projects/ProjectItem';
 import ProjectTask from './components/Tasks/ProjectTask';
 import AddTaskForm from './components/Tasks/AddTaskForm';
@@ -16,14 +15,18 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import MyMap from './components/map/MyMap';
 import AddMapInfo from './components/map/AddMapInfo';
-
-function App() {
+import Bye from './components/users/Bye';
+import DeleteForm from './components/map/DeleteForm';
+import MainTodo from './components/users/MainTodo';
+import Body from './layout/Body';
+function App(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let jwtToken = localStorage.getItem('Authorization');
+    let jwtTokenTemp = localStorage.getItem('Authorization');
 
-    if (jwtToken !== null) {
+    if (jwtTokenTemp !== null) {
+      console.log('fddf');
       dispatch(login());
     }
   }, []);
@@ -31,7 +34,8 @@ function App() {
   return (
     <div>
       <Header />
-      <Route path="/todo/" exact={true} component={ProjectItem} />
+      <Route path="/" exact={true} component={Body} />
+      <Route path="/todo" exact={true} component={ProjectItem} />
       <Route
         path="/todo/:category/:userId"
         exact={true}
@@ -44,7 +48,9 @@ function App() {
       <Route path="/user/login" exact={true} component={LoginForm} />
       <Route path="/user/register" exact={true} component={RegisterForm} />
       <Route path="/map/:userId" exact={true} component={MyMap} />
-      <Route path="/map/add" exact={true} component={AddMapInfo} />
+      <Route path="/mapInfo/add" exact={true} component={AddMapInfo} />
+      <Route path="/bye" exact={true} component={Bye} />
+      <Route path="/map/deleteForm/:id" exact={true} component={DeleteForm} />
       <Route
         path="/todo/update/:task_id/:id"
         exact={true}
@@ -54,4 +60,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(App);

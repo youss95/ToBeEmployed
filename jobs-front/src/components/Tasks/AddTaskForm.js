@@ -26,12 +26,14 @@ const AddTaskForm = (props) => {
   const [userId, setUsername] = useState();
   console.log('user', userId);
   const isLogin = useSelector((store) => store.isLogin);
-  console.log(isLogin);
+
   useEffect(() => {
     let jwtTokenTemp = localStorage.getItem('Authorization');
-    let jwtToken = jwtTokenTemp.replace('Bearer ', '');
-
-    setUsername(jwt_decode(jwtToken).id);
+    console.log(jwtTokenTemp);
+    if (jwtTokenTemp) {
+      let jwtToken = jwtTokenTemp.replace('Bearer ', '');
+      setUsername(jwt_decode(jwtToken).id);
+    }
     if (!isLogin) {
       alert('로그인을 해주세요!');
       props.history.push('/todo');
@@ -59,7 +61,7 @@ const AddTaskForm = (props) => {
       .then((res) => {
         console.log(res.data);
         setTask(res.data);
-        props.history.push('/');
+        props.history.push('/todo');
       })
       .catch((err) => {
         let errorName = err.response.data;

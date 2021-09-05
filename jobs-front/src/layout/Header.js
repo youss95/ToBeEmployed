@@ -12,13 +12,17 @@ const Header = () => {
 
   useEffect(() => {
     let jwtTokenTemp = localStorage.getItem('Authorization');
-    let jwtToken = jwtTokenTemp.replace('Bearer ', '');
+    console.log('s1', jwtTokenTemp);
 
-    setUsername(jwt_decode(jwtToken).id);
+    if (jwtTokenTemp) {
+      let jwtToken = jwtTokenTemp.replace('Bearer ', '');
+      setUsername(jwt_decode(jwtToken).id);
+    }
   }, []);
 
   const logoutProc = () => {
     localStorage.removeItem('Authorization');
+
     dispatch(logout());
     window.location.href = '/';
   };
@@ -26,12 +30,12 @@ const Header = () => {
     <div>
       <header className="header">
         <h1 className="logo">
-          <Link to={'/'}>LOGO IMG</Link>
+          <Link to={'/'}>ToBe Employed</Link>
         </h1>
         <div className="gnb">
           <ul className="clear">
             <li className="has">
-              <Link to={'/todo'}>일정</Link>
+              <Link to={'/todo'}>할 일</Link>
             </li>
             <li className="has">
               <Link to={`/map/${userId}`}>Map</Link>

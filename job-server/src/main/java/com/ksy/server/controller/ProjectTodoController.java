@@ -1,5 +1,6 @@
 package com.ksy.server.controller;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,5 +78,11 @@ public class ProjectTodoController {
 	ProjectTodo updatedTodo = toDoService.updateTodo(todo, task_id, todo_id);
 	return new ResponseEntity<ProjectTodo>(updatedTodo,HttpStatus.OK);
 		}
+	}
+	
+	@GetMapping("/must/{userId}")
+	public ResponseEntity<?> findByDate(@PathVariable Long userId) throws ParseException{
+		
+		return new ResponseEntity<List<ProjectTodo>>(toDoService.getMustList(userId),HttpStatus.OK);
 	}
 }

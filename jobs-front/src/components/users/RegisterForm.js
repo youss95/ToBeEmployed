@@ -11,6 +11,18 @@ const JoinForm = (props) => {
 
   const [nullUsernameCheck, setUsernameCheck] = useState(false);
   const [nullPwCheck, setPwCheck] = useState(false);
+
+  const userExist = () => {
+    axios.post(`http://localhost:8080/exist/${user.username}`).then((res) => {
+      console.log('ㄱ', res.data);
+      if (res.data == true) {
+        alert('중복된 아이디!!');
+      } else if (res.data == false) {
+        alert('사용가능한 아이디');
+      }
+    });
+  };
+
   const submitJoin = (e) => {
     e.preventDefault();
     if (
@@ -45,6 +57,9 @@ const JoinForm = (props) => {
         if (user.username.length > 8 || user.username.length < 4) {
           alert(errMsg.username);
         }
+        if (user.password.length > 8 || user.password.length < 4) {
+          alert(errMsg.password);
+        }
       });
   };
 
@@ -58,10 +73,11 @@ const JoinForm = (props) => {
   return (
     <Form className="loginForm">
       <Form.Group>
-        <Form.Label>아이디</Form.Label>
+        <Form.Label>아이디</Form.Label>{' '}
+        <Button onClick={userExist}>중복확인</Button>
         <Form.Control
           type="text"
-          placeholder="Enter username"
+          placeholder="아이디는 4~8자여야 합니다"
           name="username"
           onChange={changeValue}
         />
@@ -72,7 +88,7 @@ const JoinForm = (props) => {
         <Form.Label>비밀번호</Form.Label>
         <Form.Control
           type="password"
-          placeholder="Enter password"
+          placeholder="비밀번호는 4~8자여야 합니다."
           name="password"
           onChange={changeValue}
         />
