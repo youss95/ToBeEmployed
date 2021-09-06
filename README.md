@@ -1,6 +1,6 @@
 # 토이 프로젝트 ToBeEmployed
 
----
+
 
 ## Description
 
@@ -12,7 +12,7 @@
 
 ## Feature
 
----
+
 
 ### 로그인, 회원가입
 
@@ -32,15 +32,15 @@
 
 ## PostMan
 
----
 
-<img src="../ToBeEmployed/img/postMan.png" width="250px" height="350px">
+
+<img src="/img/postMan.png" width="250px" height="350px">
 
 ### [시연영상 보러가기](https://www.youtube.com/watch?v=jbQZ4RCRKPg)
 
 ## Requirements
 
----
+
 
 ### FrontEnd
 
