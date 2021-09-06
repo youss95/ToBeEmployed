@@ -42,6 +42,10 @@ const JoinForm = (props) => {
     } else if (user.password !== null) {
       setPwCheck(false);
     }
+    if (user.password.length > 8 || user.password.length < 4) {
+      alert('비밀번호는 4~8자 사이');
+      return;
+    }
     const headers = {
       'Content-Type': 'application/json;charset=utf-8',
     };
@@ -56,9 +60,6 @@ const JoinForm = (props) => {
         let errMsg = err.response.data;
         if (user.username.length > 8 || user.username.length < 4) {
           alert(errMsg.username);
-        }
-        if (user.password.length > 8 || user.password.length < 4) {
-          alert(errMsg.password);
         }
       });
   };

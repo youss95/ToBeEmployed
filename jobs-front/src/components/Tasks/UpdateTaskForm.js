@@ -51,11 +51,11 @@ const UpdateTaskForm = (props) => {
       'Content-Type': 'application/json;charset=utf-8',
     };
     axios
-      .post('http://localhost:8080/api/task/' + id, task, { headers })
+      .put('http://localhost:8080/api/task/' + id, task, { headers })
       .then((res) => {
         console.log(res.data);
         setTask(res.data);
-        props.history.push('/');
+        props.history.push(`/todo/`);
       })
       .catch((err) => {
         let errorName = err.response.data;

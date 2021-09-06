@@ -18,7 +18,7 @@ const TaskItems = (props) => {
         .then((res) => {
           console.log(res.data);
           if (res.data === 'deleted') {
-            props.history.push('/');
+            props.history.push('/todo');
           } else {
             alert('삭제 실패');
           }

@@ -11,10 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -35,7 +35,6 @@ public class User {
 	@Size(min=4,max=8,message = "아이디는 4~8자 사이")
 	@NotBlank(message = "빈칸은 안되요")
 	private String username;
-	
 	@NotBlank(message = "빈칸은 안되요")
 	private String password;
 	@JsonFormat(pattern="yyyy-mm-dd")
