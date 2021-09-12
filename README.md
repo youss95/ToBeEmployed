@@ -5,6 +5,7 @@
 ## Description
 
 - Spring-Boot를 개인적으로 학습하던 중 Restful-Api를 사용하여 간단한 개인 프로젝트를 만들고 싶었고 이에 대해서 뷰단을 서버에서 담당하지 않고 뷰 렌더링을 웹 브라우저가 담당하는 SPA방식인 리액트를 선택하였습니다.리액트는 함수형 컴포넌트를 사용하여 간단하지만 취준생 입장으로서 사용할만한 할 일 관리 기능과 카카오맵 API를 사용하여 면접을 본곳에 대한 기록을 보여주는 기능을 만들어 보았습니다.
+- [https://tobedeployed.herokuapp.com/](https://tobedeployed.herokuapp.com/)
 
 ## 일정
 
